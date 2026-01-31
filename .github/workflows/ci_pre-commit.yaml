@@ -1,0 +1,33 @@
+---
+name: Pre-Commit
+
+# Set default permissions to empty, make zizmor happy
+permissions: {}
+
+on:
+    # Should it be needed, allow manual triggering
+    workflow_dispatch:
+    # Run on any push to non-master branch
+    push:
+        branches-ignore:
+            - main
+
+jobs:
+    pre-commit:
+        name: run pre-commit hooks
+        runs-on: ubuntu-latest
+        permissions:
+            # Required for workflows in private repositories
+            contents: read
+
+        steps:
+            - name: Checkout Repo
+              id: checkout
+              uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+              with:
+                  persist-credentials: false
+                  fetch-depth: 0
+
+            - name: run pre-commit
+              id: pre-commit
+              uses: j178/prek-action@564dda4cfa5e96aafdc4a5696c4bf7b46baae5ac # v1.1.0

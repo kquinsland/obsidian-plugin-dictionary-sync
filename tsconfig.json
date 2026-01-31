@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "src",
+        "importHelpers": true,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "isolatedModules": true,
+        "lib": [
+            "DOM",
+            "ES5",
+            "ES6",
+            "ES7"
+        ],
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUncheckedIndexedAccess": true,
+        "strictBindCallApply": true,
+        "strictNullChecks": true,
+        "target": "ES6",
+        "useUnknownInCatchVariables": true
+    },
+    "include": [
+        "src/**/*.ts"
+    ]
+}

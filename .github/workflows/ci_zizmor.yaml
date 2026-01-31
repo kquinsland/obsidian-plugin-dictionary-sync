@@ -1,0 +1,39 @@
+---
+name: GitHub Actions Security Analysis with zizmor
+
+on:
+    # Should it be needed, allow manual triggering
+    workflow_dispatch:
+    # And allow calling this from other GHA workflows for composition purposes.
+    # See: https://docs.github.com/en/actions/sharing-automations/reusing-workflows#creating-a-reusable-workflow
+    workflow_call:
+    # Otherwise, we run any time there's a push that touches github workflows files
+    push:
+        # See: https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#example-including-paths
+        paths:
+            - ".github/workflows/*"
+
+# Start with no permissions, then allow per job/action
+permissions: {}
+
+jobs:
+    zizmor:
+        name: zizmor
+        runs-on: ubuntu-latest
+        permissions:
+            security-events: write
+            # required for workflows in private repositories
+            contents: read
+            actions: read
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+              with:
+                  persist-credentials: false
+
+            - name: Run zizmor 🌈
+              uses: zizmorcore/zizmor-action@135698455da5c3b3e55f73f4419e481ab68cdd95 # v0.4.1
+              with:
+                  # Code scanning and other stuff is only available on free/public OR private/org repos
+                  # Can't enable on private/personal repos
+                  advanced-security: false

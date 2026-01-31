@@ -1,0 +1,44 @@
+---
+repos:
+    # Standard fille formatting / hygiene
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      # See: https://github.com/pre-commit/pre-commit-hooks/releases
+      rev: v6.0.0
+      hooks:
+          - id: trailing-whitespace
+          - id: end-of-file-fixer
+          - id: check-json
+          - id: pretty-format-json
+            args:
+                - --autofix
+                # Note: this hook does not honor the .editorconfig value so
+                #   they need to be kept in sync manually
+                - --indent=4
+                # Do not convert extended unicode characters to escape sequences
+                - --no-ensure-ascii
+
+    # Fix any markdown issues w/ the rendered docs
+    - repo: https://github.com/DavidAnson/markdownlint-cli2
+      rev: v0.20.0
+      hooks:
+          - id: markdownlint-cli2
+
+    # Meta / Docs ... etc
+    ##
+    - repo: https://github.com/woodruffw/zizmor-pre-commit
+      # Zizmor version.
+      rev: v1.22.0
+      hooks:
+          - id: zizmor
+
+    - repo: https://github.com/renovatebot/pre-commit-hooks
+      rev: 42.84.0
+      hooks:
+          - id: renovate-config-validator
+            args: [--strict]
+
+    - repo: https://github.com/ericmjl/webp-pre-commit
+      rev: v0.0.12
+      hooks:
+          - id: convert-to-webp
+# TODO: tslint?
