@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.4](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/obsidian-dictionary-sync-v0.2.3...obsidian-dictionary-sync-v0.2.4) (2026-02-01)
+
+
+### Bug Fixes
+
+* renovate and release please should agree on `deps:` prefix ([#35](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/35)) ([a673461](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/a673461daa23f186b059e7114bbbe4a68fc2acd4))
+
+
+### Dependencies
+
+* **deps:** update dependency @eslint/json to v1 ([#10](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/10)) ([bf228e9](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/bf228e9ef855df07cd7972ca24fed2c92c7fb23f))
+* **deps:** update typescript-eslint monorepo to v8.54.0 ([#9](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/9)) ([15bb229](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/15bb229fb4e003de010c3bb143fcc2f900c5b23f))
+
 ## [0.2.3](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/obsidian-dictionary-sync-v0.2.2...obsidian-dictionary-sync-v0.2.3) (2026-02-01)
 
 
