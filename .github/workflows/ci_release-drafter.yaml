@@ -7,6 +7,9 @@ on:
 
 permissions:
     contents: write
+    # Note: this is not enough!
+    # Must _also_ toggle "Allow GitHub Actions to create and approve pull requests"
+    # https://github.com/kquinsland/obsidian-plugin-dictionary-sync/settings/actions
     pull-requests: write
     issues: write
 
