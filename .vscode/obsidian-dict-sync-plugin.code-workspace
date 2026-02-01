@@ -10,7 +10,8 @@
 			"davidvkimball",
 			"obsidianmd",
 			"prek",
-			"softprops"
+			"softprops",
+			"tsparser"
 		]
 	}
 }
