@@ -23,7 +23,7 @@
     "license": "MIT",
     "main": "main.js",
     "name": "obsidian-dictionary-sync",
-    "packageManager": "pnpm@10.20.0",
+    "packageManager": "pnpm@10.28.2",
     "scripts": {
         "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs build",
         "dev": "node esbuild.config.mjs",
