@@ -66,8 +66,6 @@ jobs:
             - name: Setup pnpm
               if: ${{ steps.release.outputs.release_created == 'true' }}
               uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-              with:
-                  version: latest
 
             - name: Install deps
               if: ${{ steps.release.outputs.release_created == 'true' }}
