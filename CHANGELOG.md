@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/obsidian-dictionary-sync-v0.2.1...obsidian-dictionary-sync-v0.2.2) (2026-02-01)
+
+
+### Bug Fixes
+
+* use semver only ([d02d7e0](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/d02d7e05040e939ea7ac5cc5566bd60f450b0090))
+
 ## [0.2.1](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/obsidian-dictionary-sync-v0.2.0...obsidian-dictionary-sync-v0.2.1) (2026-02-01)
 
 
