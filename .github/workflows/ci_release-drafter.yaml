@@ -30,7 +30,7 @@ jobs:
               uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
               with:
                   ref: ${{ fromJson(steps.release.outputs.pr).headBranchName || fromJson(steps.release.outputs.pr).head.ref }}
-                  persist-credentials: false
+                  persist-credentials: true
 
             - name: Sync manifest.json and versions.json
               if: ${{ steps.release.outputs.prs_created == 'true' }}
