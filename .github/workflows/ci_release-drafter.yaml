@@ -1,37 +1,51 @@
 name: Release Notes Drafter
 
-# as PRs are merged, update the draft release notes
 on:
     push:
         branches:
             - main
-    # pull_request event is required only for autolabeler
-    pull_request:
-        # Only following types are handled by the action, but one can default to all as well
-        types:
-            - opened
-            - reopened
-            - synchronize
 
 permissions:
-    contents: read
+    contents: write
+    pull-requests: write
+    issues: write
 
 jobs:
-    update_release_draft:
-        name: Update Release Draft
+    release-please:
         runs-on: ubuntu-latest
-        permissions:
-            # write permission is required to create a github release
-            contents: write
-            # write permission is required for autolabeler
-            # otherwise, read permission is required at least
-            pull-requests: write
-
         steps:
-            - name: Update Release Notes
-              id: update_release_draft
-              uses: release-drafter/release-drafter@6db134d15f3909ccc9eefd369f02bd1e9cffdf97 # v6.2.0
+            - name: Release Please
+              id: release
+              uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
               with:
-                  commitish: main
+                  config-file: ci/release-please-config.json
+                  manifest-file: ci/release-please-manifest.json
+
+            - name: Extract release PR branch
+              if: ${{ steps.release.outputs.prs_created == 'true' }}
+              id: pr
+              run: |
+                  node -e "const pr=JSON.parse(process.env.PR); const branch=pr.headBranchName || pr.headBranch || (pr.head && pr.head.ref) || ''; if(!branch){console.error('Unable to determine release PR branch'); process.exit(1);} require('fs').appendFileSync(process.env.GITHUB_OUTPUT, `branch=${branch}\n`);"
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PR: ${{ steps.release.outputs.pr }}
+
+            - name: Checkout release PR branch
+              if: ${{ steps.release.outputs.prs_created == 'true' }}
+              uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+              with:
+                  ref: ${{ steps.pr.outputs.branch }}
+
+            - name: Sync manifest.json and versions.json
+              if: ${{ steps.release.outputs.prs_created == 'true' }}
+              run: |
+                  VERSION="$(node -p "require('./package.json').version")"
+                  npm_package_version="$VERSION" node scripts/version-bump.mjs
+                  if [ -z "$(git status --porcelain)" ]; then
+                    echo "No version sync changes."
+                    exit 0
+                  fi
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git add manifest.json versions.json
+                  git commit -m "chore(release): sync manifest and versions"
+                  git push
