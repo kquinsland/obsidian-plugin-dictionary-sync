@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.3](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/obsidian-dictionary-sync-v0.2.2...obsidian-dictionary-sync-v0.2.3) (2026-02-01)
+
+
+### Bug Fixes
+
+* how build artifacts are named ([2bb1b2b](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/2bb1b2b70acd0ed8c9b6c80054151c671e8a7a43))
+* how build artifacts are named ([89bcf62](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/89bcf62ab59b0b131f5d33643e18da772f73a8fd))
+
 ## [0.2.2](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/obsidian-dictionary-sync-v0.2.1...obsidian-dictionary-sync-v0.2.2) (2026-02-01)
 
 
