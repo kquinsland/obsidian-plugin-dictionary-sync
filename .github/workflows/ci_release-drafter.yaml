@@ -80,15 +80,14 @@ jobs:
             - name: Verify manifest version matches tag
               if: ${{ steps.release.outputs.release_created == 'true' }}
               run: |
-                  TAG="${RELEASE_TAG}"
-                  TAG="${TAG#v}"
+                  TAG="${RELEASE_VERSION}"
                   MANIFEST_VERSION="$(node -p "require('./manifest.json').version")"
                   if [ "$TAG" != "$MANIFEST_VERSION" ]; then
                     echo "manifest.json version ($MANIFEST_VERSION) does not match tag ($TAG)"
                     exit 1
                   fi
               env:
-                  RELEASE_TAG: ${{ steps.release.outputs.tag_name }}
+                  RELEASE_VERSION: ${{ steps.release.outputs.version }}
 
             - name: Package release
               if: ${{ steps.release.outputs.release_created == 'true' }}
