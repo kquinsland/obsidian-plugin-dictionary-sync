@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/obsidian-dictionary-sync-v0.1.1...obsidian-dictionary-sync-v0.2.0) (2026-02-01)
+
+
+### Features
+
+* actually build the release assets ([e86c0ee](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/e86c0ee88294937c7a7085751a73a3bb389d3fe6))
+* actually build the release assets ([5f7158f](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/5f7158f18e446fc913c10cd0401cce2aeb5ebc00))
+
+
+### Bug Fixes
+
+* zizmor lint ([04b6a06](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/04b6a0678ebe7ac425abe4f61bce74b5f25a870c))
+
 ## [0.1.1](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/obsidian-dictionary-sync-v0.1.0...obsidian-dictionary-sync-v0.1.1) (2026-02-01)
 
 
