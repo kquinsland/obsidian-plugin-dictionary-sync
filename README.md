@@ -145,6 +145,7 @@ But other than that, really just test/debug with these buttons.
 Support is going to be limited.
 This is a personal project that I created to solve my own problem.
 If you find it useful and want to help improve it, please consider submitting pull requests.
+Please use squash merges and a single conventional commit-style message (e.g., `fix:` or `feat:`) so release-please generates clean, non-duplicative release notes.
 
 ## TODO
 
