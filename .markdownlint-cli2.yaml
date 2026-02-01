@@ -10,6 +10,8 @@ ignores:
     - problem.md
     - AGENTS.md
     - .agent/**
+    # TODO: get release-please to properly format this file
+    - CHANGELOG.md
 
 # Disable banner message on stdout (only valid at root)
 noBanner: true

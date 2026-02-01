@@ -7,10 +7,18 @@ repos:
       hooks:
           - id: trailing-whitespace
           - id: end-of-file-fixer
-            exclude: manifest.json
+            exclude: |
+                (?x)^(
+                    manifest.json|
+                    ci/release-please-config.json
+                )$
           - id: check-json
           - id: pretty-format-json
-            exclude: ci/release-please-config.json
+            exclude: |
+                (?x)^(
+                    manifest.json|
+                    ci/release-please-config.json
+                )$
             args:
                 - --autofix
                 # Note: this hook does not honor the .editorconfig value so
