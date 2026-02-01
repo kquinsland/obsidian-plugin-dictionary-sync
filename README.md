@@ -157,6 +157,5 @@ If you find it useful and want to help improve it, please consider submitting pu
 - Archive my `rust` [repo](https://github.com/kquinsland/obsidian-dict-sync)
   - Push a small update to the readme to point to this new plugin repo
   - Close all PRs on that repo
-  - Remove that repo from my renovate list
 
-- Announce
+- Announce plugin on Obsidian forum?
