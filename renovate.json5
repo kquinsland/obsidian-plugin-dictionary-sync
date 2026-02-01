@@ -7,8 +7,10 @@
 	// See: https://docs.renovatebot.com/modules/manager/pre-commit/#additional-information
 	extends: [
 		"config:recommended",
-		":enablePreCommit"
+		":enablePreCommit",
+		":semanticCommitTypeAll(deps)"
 	],
+	semanticCommits: "enabled",
 	configMigration: true,
 	dependencyDashboard: true,
 	// This is a tool that has decent upstream tests.
