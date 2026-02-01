@@ -34,5 +34,5 @@
         "version": "node scripts/version-bump.mjs && git add manifest.json versions.json"
     },
     "type": "module",
-    "version": "0.2.1"
+    "version": "0.2.2"
 }
