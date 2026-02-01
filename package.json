@@ -1,39 +1,38 @@
 {
-    "author": "Karl",
-    "dependencies": {
-        "obsidian": "latest"
-    },
-    "description": "Sync words from an authoritative note into the Obsidian custom dictionary.",
-    "devDependencies": {
-        "@eslint/js": "^9.30.1",
-        "@eslint/json": "^0.14.0",
-        "@types/node": "^16.11.6",
-        "@typescript-eslint/eslint-plugin": "^8.33.1",
-        "@typescript-eslint/parser": "^8.33.1",
-        "esbuild": "0.25.5",
-        "eslint": "^9.39.1",
-        "eslint-plugin-obsidianmd": "0.1.9",
-        "globals": "14.0.0",
-        "jiti": "2.6.1",
-        "obsidian-dev-skills": "^1.0.2",
-        "tslib": "2.4.0",
-        "typescript": "5.8.3",
-        "typescript-eslint": "8.35.1"
-    },
-    "license": "MIT",
-    "main": "main.js",
-    "name": "obsidian-dictionary-sync",
-    "packageManager": "pnpm@10.20.0",
-    "scripts": {
-        "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs build",
-        "dev": "node esbuild.config.mjs",
-        "dev:deploy": "node scripts/dev-deploy.mjs",
-        "lint": "node scripts/lint-wrapper.mjs",
-        "lint:fix": "node scripts/lint-wrapper.mjs --fix",
-        "preinstall": "node scripts/npm-proxy.mjs",
-        "upgrade": "node scripts/upgrade.mjs",
-        "version": "node version-bump.mjs && git add manifest.json versions.json"
-    },
-    "type": "module",
-    "version": "1.0.0"
+	"author": "Karl",
+	"dependencies": {
+		"obsidian": "latest"
+	},
+	"description": "Sync words from an authoritative note into the Obsidian custom dictionary.",
+	"devDependencies": {
+		"@eslint/js": "^9.30.1",
+		"@eslint/json": "^0.14.0",
+		"@types/node": "^16.11.6",
+		"@typescript-eslint/eslint-plugin": "^8.33.1",
+		"@typescript-eslint/parser": "^8.33.1",
+		"esbuild": "0.25.5",
+		"eslint": "^9.39.1",
+		"eslint-plugin-obsidianmd": "0.1.9",
+		"globals": "14.0.0",
+		"jiti": "2.6.1",
+		"obsidian-dev-skills": "^1.0.2",
+		"tslib": "2.4.0",
+		"typescript": "5.8.3",
+		"typescript-eslint": "8.35.1"
+	},
+	"license": "MIT",
+	"main": "main.js",
+	"name": "obsidian-dictionary-sync",
+	"packageManager": "pnpm@10.20.0",
+	"scripts": {
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs build",
+		"dev": "node esbuild.config.mjs",
+		"dev:deploy": "node scripts/dev-deploy.mjs",
+		"lint": "node scripts/lint-wrapper.mjs",
+		"lint:fix": "node scripts/lint-wrapper.mjs --fix",
+		"preinstall": "node scripts/npm-proxy.mjs",
+		"version": "node scripts/version-bump.mjs && git add manifest.json versions.json"
+	},
+	"type": "module",
+	"version": "0.1.0"
 }
