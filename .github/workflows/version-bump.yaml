@@ -14,8 +14,12 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout
-              uses: actions/checkout@v4
+            - name: Checkout Repo
+              id: checkout
+              uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+              with:
+                  persist-credentials: false
+                  fetch-depth: 0
 
             - name: Resolve next version
               id: resolve_version
@@ -28,7 +32,7 @@ jobs:
             - name: Determine version
               id: version
               run: |
-                  TAG="${{ steps.resolve_version.outputs.tag_name }}"
+                  TAG="${STEPS_RESOLVE_VERSION_OUTPUTS_TAG_NAME}"
                   NEXT_VERSION="${TAG#v}"
                   CURRENT_VERSION="$(node -p "require('./package.json').version")"
                   if [ -z "$NEXT_VERSION" ]; then
@@ -41,14 +45,17 @@ jobs:
                     exit 0
                   fi
                   echo "next_version=$NEXT_VERSION" >> "$GITHUB_OUTPUT"
+              env:
+                  STEPS_RESOLVE_VERSION_OUTPUTS_TAG_NAME: ${{ steps.resolve_version.outputs.tag_name }}
 
             - name: Update package.json version
               if: steps.version.outputs.skip != 'true'
               run: |
-                  NEXT_VERSION="${{ steps.version.outputs.next_version }}"
+                  NEXT_VERSION="${STEPS_VERSION_OUTPUTS_NEXT_VERSION}"
                   node -e "const fs=require('fs');const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));pkg.version=process.env.NEXT_VERSION;fs.writeFileSync('package.json', JSON.stringify(pkg, null, 4) + '\n');"
               env:
                   NEXT_VERSION: ${{ steps.version.outputs.next_version }}
+                  STEPS_VERSION_OUTPUTS_NEXT_VERSION: ${{ steps.version.outputs.next_version }}
 
             - name: Sync manifest.json and versions.json
               if: steps.version.outputs.skip != 'true'
@@ -63,5 +70,7 @@ jobs:
                   git config user.name "github-actions[bot]"
                   git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
                   git add package.json manifest.json versions.json
-                  git commit -m "chore(release): bump version to v${{ steps.version.outputs.next_version }}"
+                  git commit -m "chore(release): bump version to v${STEPS_VERSION_OUTPUTS_NEXT_VERSION}"
                   git push
+              env:
+                  STEPS_VERSION_OUTPUTS_NEXT_VERSION: ${{ steps.version.outputs.next_version }}

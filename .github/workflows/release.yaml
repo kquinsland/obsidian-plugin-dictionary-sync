@@ -12,8 +12,12 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout
-              uses: actions/checkout@v4
+            - name: Checkout Repo
+              id: checkout
+              uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+              with:
+                  persist-credentials: false
+                  fetch-depth: 0
 
             - name: Setup Node
               uses: actions/setup-node@v4
@@ -34,17 +38,21 @@ jobs:
 
             - name: Verify manifest version matches tag
               run: |
-                  TAG="${{ github.event.release.tag_name }}"
+                  TAG="${GITHUB_EVENT_RELEASE_TAG_NAME}"
                   TAG="${TAG#v}"
                   MANIFEST_VERSION="$(node -p "require('./manifest.json').version")"
                   if [ "$TAG" != "$MANIFEST_VERSION" ]; then
                     echo "manifest.json version ($MANIFEST_VERSION) does not match tag ($TAG)"
                     exit 1
                   fi
+              env:
+                  GITHUB_EVENT_RELEASE_TAG_NAME: ${{ github.event.release.tag_name }}
 
             - name: Package release
               run: |
-                  zip -j "obsidian-dictionary-sync-${{ github.event.release.tag_name }}.zip" main.js manifest.json styles.css
+                  zip -j "obsidian-dictionary-sync-${GITHUB_EVENT_RELEASE_TAG_NAME}.zip" main.js manifest.json styles.css
+              env:
+                  GITHUB_EVENT_RELEASE_TAG_NAME: ${{ github.event.release.tag_name }}
 
             - name: Upload release assets
               uses: softprops/action-gh-release@v2
