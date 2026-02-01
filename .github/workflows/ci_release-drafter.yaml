@@ -7,14 +7,45 @@ on:
 
 permissions:
     contents: write
-    issues: write
     pull-requests: write
+    issues: write
 
 jobs:
     release-please:
         runs-on: ubuntu-latest
         steps:
-            - uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
+            - name: Release Please
+              id: release
+              uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
               with:
                   config-file: ci/release-please-config.json
                   manifest-file: ci/release-please-manifest.json
+
+            - name: Extract release PR branch
+              if: ${{ steps.release.outputs.prs_created == 'true' }}
+              id: pr
+              run: |
+                  node -e "const pr=JSON.parse(process.env.PR); const branch=pr.headBranchName || pr.headBranch || (pr.head && pr.head.ref) || ''; if(!branch){console.error('Unable to determine release PR branch'); process.exit(1);} require('fs').appendFileSync(process.env.GITHUB_OUTPUT, `branch=${branch}\n`);"
+              env:
+                  PR: ${{ steps.release.outputs.pr }}
+
+            - name: Checkout release PR branch
+              if: ${{ steps.release.outputs.prs_created == 'true' }}
+              uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+              with:
+                  ref: ${{ steps.pr.outputs.branch }}
+
+            - name: Sync manifest.json and versions.json
+              if: ${{ steps.release.outputs.prs_created == 'true' }}
+              run: |
+                  VERSION="$(node -p "require('./package.json').version")"
+                  npm_package_version="$VERSION" node scripts/version-bump.mjs
+                  if [ -z "$(git status --porcelain)" ]; then
+                    echo "No version sync changes."
+                    exit 0
+                  fi
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git add manifest.json versions.json
+                  git commit -m "chore(release): sync manifest and versions"
+                  git push
