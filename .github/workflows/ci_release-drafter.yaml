@@ -92,7 +92,7 @@ jobs:
             - name: Package release
               if: ${{ steps.release.outputs.release_created == 'true' }}
               run: |
-                  zip -j "obsidian-dictionary-sync-${RELEASE_TAG}.zip" main.js manifest.json styles.css
+                  zip -j "${RELEASE_TAG}.zip" main.js manifest.json styles.css
               env:
                   RELEASE_TAG: ${{ steps.release.outputs.tag_name }}
 
@@ -105,4 +105,4 @@ jobs:
                       main.js
                       manifest.json
                       styles.css
-                      obsidian-dictionary-sync-${{ steps.release.outputs.tag_name }}.zip
+                      ${{ steps.release.outputs.tag_name }}.zip
