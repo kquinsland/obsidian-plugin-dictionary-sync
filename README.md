@@ -75,7 +75,7 @@ When done, it should look something like this:
 ├── .obsidian
 │ # <...>
 │   ├── plugins
-│   │   └── obsidian-dictionary-sync
+│   │   └── dictionary-sync
 │   │       ├── data.json
 │   │       ├── main.js
 │   │       ├── manifest.json

@@ -8,7 +8,7 @@ const targetDir = path.join(
 	"test-vault",
 	".obsidian",
 	"plugins",
-	"obsidian-dictionary-sync"
+	"dictionary-sync"
 );
 
 const filesToSync = ["main.js", "manifest.json", "styles.css"];
