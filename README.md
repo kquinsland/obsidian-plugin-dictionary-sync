@@ -148,14 +148,6 @@ If you find it useful and want to help improve it, please consider submitting pu
 
 ## TODO
 
-- Release initial version
-  - [ ] Squash/reset history
 - [ ] Wire up repo to [Obsidian Community Plugins list](https://publish.obsidian.md/hub/04+-+Guides%2C+Workflows%2C+%26+Courses/Guides/How+to+add+your+plugin+to+the+community+plugin+list)
 - [ ] Lots of room for automation / testing. I know _nothing_ about the state of the art w/r/t JS in general, let alone Obsidian plugin testing.
   - is there a way to run obsidian heedlessly for testing purposes? Could be nice to automate screenshots of the settings UI... etc
-
-- Archive my `rust` [repo](https://github.com/kquinsland/obsidian-dict-sync)
-  - Push a small update to the readme to point to this new plugin repo
-  - Close all PRs on that repo
-
-- Announce plugin on Obsidian forum?
