@@ -1,9 +1,9 @@
 {
-    "author": "Karl",
-    "description": "Sync words from an authoritative note into the Obsidian custom dictionary.",
-    "id": "dictionary-sync",
-    "isDesktopOnly": true,
-    "minAppVersion": "1.11.0",
-    "name": "Dictionary Sync",
-    "version": "0.3.0"
+	"author": "Karl",
+	"description": "Sync words from an authoritative note into the Obsidian custom dictionary.",
+	"id": "dictionary-sync",
+	"isDesktopOnly": true,
+	"minAppVersion": "1.11.0",
+	"name": "Dictionary Sync",
+	"version": "0.3.1"
 }
