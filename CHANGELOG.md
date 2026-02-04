@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/0.3.1...0.3.2) (2026-02-04)
+
+
+### Bug Fixes
+
+* description ([#51](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/51)) ([4452453](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/44524533b749dfc4eb1abc3990124874a2ba1d00))
+
 ## [0.3.1](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/0.3.0...0.3.1) (2026-02-04)
 
 
