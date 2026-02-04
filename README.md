@@ -50,6 +50,10 @@ Because Obsidian now uses Electron's built-in spell checker, you are limited to 
 This means that if you have multiple vaults, they will all share the same custom dictionary.
 For most people, this either isn't a problem or is even desirable but it's worth noting this for any tool that, for example, tries to synchronize a custom dictionary across multiple devices using a note within a vault.
 
+### Mobile support
+
+This plugin is desktop-only. It relies on Electron APIs that are not available on Obsidian mobile, so the core dictionary sync functionality will not work there.
+
 ## Credits
 
 The only reason this repo / plugin exist is because `davidvkimball` already did a _ton_ of the heavy lifting with their [`obsidian-sample-plugin-plus` repo](https://github.com/davidvkimball/obsidian-sample-plugin-plus).
