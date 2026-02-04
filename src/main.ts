@@ -36,7 +36,7 @@ export default class DictionarySyncPlugin extends Plugin {
 		this.addSettingTab(this.settingsTab);
 
 		this.addCommand({
-			id: "dictionary-sync-now",
+			id: "sync-now",
 			name: "Sync dictionary now",
 			callback: () => {
 				void this.syncNow("command", this.getDefaultDirection());
