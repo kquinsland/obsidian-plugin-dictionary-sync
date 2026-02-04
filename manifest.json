@@ -1,9 +1,9 @@
 {
-    "author": "Karl",
-    "description": "Synchronize custom dictionary words with a note in your vault.",
-    "id": "dictionary-sync",
-    "isDesktopOnly": true,
-    "minAppVersion": "1.11.0",
-    "name": "Dictionary Sync",
-    "version": "0.3.1"
+	"author": "Karl",
+	"description": "Synchronize custom dictionary words with a note in your vault.",
+	"id": "dictionary-sync",
+	"isDesktopOnly": true,
+	"minAppVersion": "1.11.0",
+	"name": "Dictionary Sync",
+	"version": "0.3.2"
 }
