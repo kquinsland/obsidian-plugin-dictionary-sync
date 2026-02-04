@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.3](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/0.3.2...0.3.3) (2026-02-04)
+
+
+### Bug Fixes
+
+* small eslint things ([#53](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/53)) ([fb3711b](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/fb3711b6318ec1c200708d69ff6643b374a4c99e))
+
 ## [0.3.2](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/0.3.1...0.3.2) (2026-02-04)
 
 
