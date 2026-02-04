@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.2.5](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/obsidian-dictionary-sync-v0.2.4...obsidian-dictionary-sync-v0.2.5) (2026-02-04)
+
+
+### Bug Fixes
+
+* change the plugin id ([#46](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/46)) ([102a131](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/102a1314aa29e680f54c28e358aafd609826fb56))
+* renovate and release please should agree on `deps:` prefix ([#37](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/37)) ([cd44c64](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/cd44c64c7daddbd6f88b836a36127e623235dc00))
+
+
+### Dependencies
+
+* **deps:** update dependency @types/node to v24.10.10 ([#43](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/43)) ([d4b9a30](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/d4b9a30cddef60d63e939d2399788fe3427d0dd2))
+* **deps:** update dependency obsidian-dev-skills to v1.1.0 ([#40](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/40)) ([ae90404](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/ae904040824f70fb9d1637001b203dba00276274))
+* **deps:** update dependency obsidian-dev-skills to v1.1.2 ([#42](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/42)) ([c3f7489](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/c3f7489aa1ecad989b09090daf33040fe332cffb))
+* **deps:** update pre-commit hook renovatebot/pre-commit-hooks to v43.2.0 ([#39](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/39)) ([14fc4d0](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/14fc4d08819a58c8665d9513b40a1efa11164b0c))
+* **deps:** update pre-commit hook renovatebot/pre-commit-hooks to v43.2.1 ([#41](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/41)) ([67dc44f](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/67dc44f33680e0924d865224f574839a502e6e95))
+* **deps:** update pre-commit hook renovatebot/pre-commit-hooks to v43.2.6 ([#44](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/44)) ([75539cb](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/75539cb777b2c39a97c029947aac414426d4e0d8))
+
 ## [0.2.4](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/obsidian-dictionary-sync-v0.2.3...obsidian-dictionary-sync-v0.2.4) (2026-02-01)
 
 
