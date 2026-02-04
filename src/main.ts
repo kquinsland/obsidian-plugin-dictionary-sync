@@ -1,4 +1,4 @@
-import { Notice, Plugin, TFile } from "obsidian";
+import { MarkdownView, Notice, Plugin, TFile, normalizePath } from "obsidian";
 import { DEFAULT_SETTINGS, DictSyncSettingTab, DictSyncSettings, SyncBehavior } from "./settings";
 import { buildAuthoritativeNoteContent, extractLineWordsFromNote } from "./utils/dictionary";
 import { resolveDictionaryPath, resolveUserDataPath } from "./utils/dictionary-path";
@@ -146,7 +146,7 @@ export default class DictionarySyncPlugin extends Plugin {
 				await this.updateSettings({ lastSourceWordCount: 0 });
 			}
 		} catch (error) {
-			console.warn("[dictionary-sync] Failed to read source note", error);
+			console.error("[dictionary-sync] Failed to read source note", error);
 			await this.updateSettings({ lastSourceWordCount: 0 });
 		}
 
@@ -172,7 +172,6 @@ export default class DictionarySyncPlugin extends Plugin {
 			return;
 		}
 
-		console.info("[dictionary-sync] Sync started", { trigger, direction });
 		this.syncInProgress = true;
 		await this.updateSettings({
 			lastSyncStatus: "syncing",
@@ -203,15 +202,6 @@ export default class DictionarySyncPlugin extends Plugin {
 				}
 			}
 
-			console.info("[dictionary-sync] Sync complete", {
-				trigger,
-				direction,
-				sourceCount: sourceWords.length,
-				hostCount: hostWords.length,
-				addedCount,
-				removedCount,
-				warning,
-			});
 		} catch (error) {
 			await this.updateSettings({
 				lastSyncTime: new Date().toISOString(),
@@ -264,8 +254,8 @@ export default class DictionarySyncPlugin extends Plugin {
 			osVersion = (os as unknown as { version?: () => string }).version?.()
 				?? os.release?.()
 				?? osVersion;
-		} catch (error) {
-			console.debug("[dictionary-sync] OS info unavailable", error);
+		} catch {
+			// Ignore OS lookup failures.
 		}
 
 		const versions = (typeof process !== "undefined" && process.versions)
@@ -345,7 +335,7 @@ export default class DictionarySyncPlugin extends Plugin {
 					addedCount += 1;
 				}
 			} catch (error) {
-				console.warn("[dictionary-sync] Failed to add word", word, error);
+				console.error("[dictionary-sync] Failed to add word", word, error);
 			}
 		}
 
@@ -361,7 +351,7 @@ export default class DictionarySyncPlugin extends Plugin {
 								removedCount += 1;
 							}
 						} catch (error) {
-							console.warn("[dictionary-sync] Failed to remove word", word, error);
+							console.error("[dictionary-sync] Failed to remove word", word, error);
 						}
 					}
 				} else {
@@ -373,7 +363,12 @@ export default class DictionarySyncPlugin extends Plugin {
 		if (direction === "bidirectional" || direction === "local-to-authoritative") {
 			const updatedContent = buildAuthoritativeNoteContent(desiredSourceWords, content);
 			if (updatedContent !== content) {
-				await this.app.vault.modify(sourceFile, updatedContent);
+				const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
+				if (activeView?.file?.path === sourceFile.path) {
+					activeView.editor.setValue(updatedContent);
+				} else {
+					await this.app.vault.process(sourceFile, () => updatedContent);
+				}
 			}
 		}
 
@@ -387,7 +382,7 @@ export default class DictionarySyncPlugin extends Plugin {
 	}
 
 	private getSourceFile(): TFile | null {
-		const path = this.settings.authoritativeNotePath.trim();
+		const path = normalizePath(this.settings.authoritativeNotePath.trim());
 		if (!path) {
 			return null;
 		}
@@ -408,8 +403,8 @@ export default class DictionarySyncPlugin extends Plugin {
 			if (electron?.remote?.getCurrentWebContents) {
 				return electron.remote.getCurrentWebContents().session;
 			}
-		} catch (error) {
-			console.debug("[dictionary-sync] Electron session unavailable", error);
+		} catch {
+			// Ignore Electron lookup failures.
 		}
 
 		return null;

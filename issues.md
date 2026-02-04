@@ -1,5 +1,9 @@
 # Audit findings
 
+Status notes:
+- ✅ Fixed in working tree
+- ⏳ Still open
+
 # Plugin guidelines (concise summary)
 
 - Use `this.app` instead of the global `app`.
@@ -19,7 +23,7 @@
 
 ## High
 
-- Mobile compatibility: Node/Electron APIs used directly can crash on mobile. Guard with `Platform.isMobile` and/or lazy-load; avoid executing Node/Electron code on mobile.
+- ⏳ Mobile compatibility: Node/Electron APIs used directly can crash on mobile. Guard with `Platform.isMobile` and/or lazy-load; avoid executing Node/Electron code on mobile.
   - `src/utils/dictionary-path.ts:1`
   - `src/utils/dictionary-path.ts:23`
   - `src/utils/dictionary-path.ts:39`
@@ -29,11 +33,11 @@
 
 ## Medium
 
-- Background note edits use `Vault.modify` instead of `Vault.process`, and active note edits should prefer the Editor API to preserve cursor/selection. `src/main.ts:373`
-- User-defined note path is not normalized. Use `normalizePath()` when storing/using `authoritativeNotePath`. `src/main.ts:389`
-- Settings headings use raw HTML headings and a top-level plugin heading. Prefer `Setting.setHeading()` and avoid a top-level heading if there’s only one section. `src/settings.ts:63`, `src/utils/settings-compat.ts:61`
+- ✅ Background note edits use `Vault.modify` instead of `Vault.process`, and active note edits should prefer the Editor API to preserve cursor/selection. `src/main.ts:373`
+- ✅ User-defined note path is not normalized. Use `normalizePath()` when storing/using `authoritativeNotePath`. `src/main.ts:389`
+- ✅ Settings headings use raw HTML headings and a top-level plugin heading. Prefer `Setting.setHeading()` and avoid a top-level heading if there’s only one section. `src/settings.ts:63`, `src/utils/settings-compat.ts:61`
 
 ## Low
 
-- UI text uses Title Case for section headings; use Sentence case. `src/settings.ts:65`, `src/settings.ts:102`, `src/settings.ts:148`
-- Console logging includes info/debug/warn; guidelines recommend default console output be errors only. `src/main.ts:149`, `src/main.ts:175`, `src/main.ts:206`, `src/main.ts:268`, `src/main.ts:348`, `src/main.ts:364`, `src/main.ts:412`, `src/utils/dictionary-path.ts:33`
+- ✅ UI text uses Title Case for section headings; use Sentence case. `src/settings.ts:65`, `src/settings.ts:102`, `src/settings.ts:148`
+- ✅ Console logging includes info/debug/warn; guidelines recommend default console output be errors only. `src/main.ts:149`, `src/main.ts:175`, `src/main.ts:206`, `src/main.ts:268`, `src/main.ts:348`, `src/main.ts:364`, `src/main.ts:412`, `src/utils/dictionary-path.ts:33`
