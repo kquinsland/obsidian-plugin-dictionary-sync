@@ -78,14 +78,8 @@ export default class DictionarySyncPlugin extends Plugin {
 	}
 
 	private stripVolatileSettings(settings: DictSyncSettings): DictSyncSettings {
-		const {
-			dictionaryPath,
-			dictionaryPathError,
-			hostDictionaryError,
-			...rest
-		} = settings;
 		return {
-			...rest,
+			...settings,
 			dictionaryPath: null,
 			dictionaryPathError: null,
 			hostDictionaryError: null,
