@@ -29,8 +29,8 @@ export function resolveUserDataPath(): string | null {
 		if (electron?.remote?.app?.getPath) {
 			return electron.remote.app.getPath("userData");
 		}
-	} catch (error) {
-		console.debug("[dictionary-sync] Electron userData path unavailable", error);
+	} catch {
+		// Ignore Electron lookup failures.
 	}
 
 	return null;

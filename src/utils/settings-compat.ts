@@ -59,8 +59,7 @@ export function createSettingsGroup(
 	}
 
 	if (heading) {
-		const headingEl = containerEl.createDiv('setting-group-heading');
-		headingEl.createEl('h3', { text: heading });
+		new Setting(containerEl).setName(heading).setHeading();
 	}
 
 	return {

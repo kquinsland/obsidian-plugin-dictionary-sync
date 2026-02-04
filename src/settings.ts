@@ -1,4 +1,4 @@
-import { App, Notice, PluginSettingTab, Setting, SuggestModal, TFile } from "obsidian";
+import { App, Notice, PluginSettingTab, Setting, SuggestModal, TFile, normalizePath } from "obsidian";
 import DictionarySyncPlugin, { SyncDirection } from "./main";
 import { createSettingsGroup } from "./utils/settings-compat";
 
@@ -60,9 +60,7 @@ export class DictSyncSettingTab extends PluginSettingTab {
 		this.statusArea = null;
 		this.intervalDescEl = null;
 
-		containerEl.createEl("h2", { text: "Dictionary Sync" });
-
-		const sourceGroup = createSettingsGroup(containerEl, "Authoritative Source", this.plugin.manifest.id);
+		const sourceGroup = createSettingsGroup(containerEl, "Authoritative source", this.plugin.manifest.id);
 		sourceGroup.addSetting((setting) => {
 			setting
 				.setName("Source note")
@@ -72,7 +70,8 @@ export class DictSyncSettingTab extends PluginSettingTab {
 						.setPlaceholder("path/to/note.md")
 						.setValue(this.plugin.settings.authoritativeNotePath)
 						.onChange(async (value) => {
-							await this.plugin.updateSettings({ authoritativeNotePath: value.trim() });
+							const normalized = normalizePath(value.trim());
+							await this.plugin.updateSettings({ authoritativeNotePath: normalized });
 						});
 				})
 				.addButton((button) => {
@@ -99,7 +98,7 @@ export class DictSyncSettingTab extends PluginSettingTab {
 				});
 		});
 
-		const syncGroup = createSettingsGroup(containerEl, "Sync Trigger", this.plugin.manifest.id);
+		const syncGroup = createSettingsGroup(containerEl, "Sync trigger", this.plugin.manifest.id);
 		syncGroup.addSetting((setting) => {
 			setting
 				.setName("Manual sync")
