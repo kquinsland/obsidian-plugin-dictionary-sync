@@ -76,8 +76,8 @@ export class DictSyncSettingTab extends PluginSettingTab {
 				})
 				.addButton((button) => {
 					button.setButtonText("Browse").onClick(() => {
-						new NoteSuggestModal(this.app, async (file) => {
-							await this.plugin.updateSettings({ authoritativeNotePath: file.path });
+						new NoteSuggestModal(this.app, (file) => {
+							void this.plugin.updateSettings({ authoritativeNotePath: file.path });
 						}).open();
 					});
 				});

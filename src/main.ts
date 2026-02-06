@@ -1,4 +1,5 @@
 import { MarkdownView, Notice, Plugin, TFile, normalizePath } from "obsidian";
+import * as os from "os";
 import { DEFAULT_SETTINGS, DictSyncSettingTab, DictSyncSettings, SyncBehavior } from "./settings";
 import { buildAuthoritativeNoteContent, extractLineWordsFromNote } from "./utils/dictionary";
 import { resolveDictionaryPath, resolveUserDataPath } from "./utils/dictionary-path";
@@ -36,7 +37,7 @@ export default class DictionarySyncPlugin extends Plugin {
 		this.addSettingTab(this.settingsTab);
 
 		this.addCommand({
-			id: "dictionary-sync-now",
+			id: "sync-now",
 			name: "Sync dictionary now",
 			callback: () => {
 				void this.syncNow("command", this.getDefaultDirection());
@@ -78,14 +79,8 @@ export default class DictionarySyncPlugin extends Plugin {
 	}
 
 	private stripVolatileSettings(settings: DictSyncSettings): DictSyncSettings {
-		const {
-			dictionaryPath,
-			dictionaryPathError,
-			hostDictionaryError,
-			...rest
-		} = settings;
 		return {
-			...rest,
+			...settings,
 			dictionaryPath: null,
 			dictionaryPathError: null,
 			hostDictionaryError: null,
@@ -248,7 +243,6 @@ export default class DictionarySyncPlugin extends Plugin {
 		let arch = "unknown";
 		let osVersion = "unknown";
 		try {
-			const os = require("os") as typeof import("os");
 			platform = os.platform?.() ?? platform;
 			arch = os.arch?.() ?? arch;
 			osVersion = (os as unknown as { version?: () => string }).version?.()
