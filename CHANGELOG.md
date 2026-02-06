@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.5](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/0.3.4...0.3.5) (2026-02-06)
+
+
+### Bug Fixes
+
+* remove the other two `require()` calls ([#63](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/issues/63)) ([e6496b7](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/commit/e6496b7aa3c538782ece9974fdc1001aa35cb38d))
+
 ## [0.3.4](https://github.com/kquinsland/obsidian-plugin-dictionary-sync/compare/0.3.3...0.3.4) (2026-02-06)
 
 
