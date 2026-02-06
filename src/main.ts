@@ -1,4 +1,5 @@
 import { MarkdownView, Notice, Plugin, TFile, normalizePath } from "obsidian";
+import * as electron from "electron";
 import * as os from "os";
 import { DEFAULT_SETTINGS, DictSyncSettingTab, DictSyncSettings, SyncBehavior } from "./settings";
 import { buildAuthoritativeNoteContent, extractLineWordsFromNote } from "./utils/dictionary";
@@ -9,6 +10,25 @@ export type SyncDirection = "bidirectional" | "authoritative-to-local" | "local-
 
 declare const __PLUGIN_VERSION__: string;
 declare const __GIT_HASH__: string;
+
+type SpellCheckerSession = {
+	listWordsInSpellCheckerDictionary?: (...args: unknown[]) => Promise<string[]>;
+	listWordsFromSpellCheckerDictionary?: (...args: unknown[]) => Promise<string[]>;
+	addWordToSpellCheckerDictionary?: (word: string) => boolean;
+	removeWordFromSpellCheckerDictionary?: (word: string) => boolean;
+};
+
+type ElectronCompat = typeof import("electron") & {
+	remote?: {
+		session?: {
+			defaultSession?: SpellCheckerSession;
+		};
+		getCurrentWebContents?: () => { session: SpellCheckerSession };
+	};
+	session?: {
+		defaultSession?: SpellCheckerSession;
+	};
+};
 
 export default class DictionarySyncPlugin extends Plugin {
 	settings: DictSyncSettings;
@@ -387,15 +407,15 @@ export default class DictionarySyncPlugin extends Plugin {
 
 	private getSpellCheckerSession() {
 		try {
-			const electron = require("electron") as unknown as Record<string, any>;
-			if (electron?.session?.defaultSession) {
-				return electron.session.defaultSession;
+			const electronCompat = electron as ElectronCompat;
+			if (electronCompat.session?.defaultSession) {
+				return electronCompat.session.defaultSession;
 			}
-			if (electron?.remote?.session?.defaultSession) {
-				return electron.remote.session.defaultSession;
+			if (electronCompat.remote?.session?.defaultSession) {
+				return electronCompat.remote.session.defaultSession;
 			}
-			if (electron?.remote?.getCurrentWebContents) {
-				return electron.remote.getCurrentWebContents().session;
+			if (electronCompat.remote?.getCurrentWebContents) {
+				return electronCompat.remote.getCurrentWebContents().session;
 			}
 		} catch {
 			// Ignore Electron lookup failures.

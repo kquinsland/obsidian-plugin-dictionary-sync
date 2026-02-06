@@ -1,10 +1,22 @@
 import * as path from "path";
 import { promises as fs } from "fs";
+import * as electron from "electron";
 
 interface DictionaryPathResult {
 	path: string | null;
 	error: string | null;
 }
+
+type ElectronCompat = typeof import("electron") & {
+	remote?: {
+		app?: {
+			getPath?: (name: string) => string;
+		};
+	};
+	app?: {
+		getPath?: (name: string) => string;
+	};
+};
 
 export async function resolveDictionaryPath(userDataPath: string | null): Promise<DictionaryPathResult> {
 	const candidates = buildDictionaryPathCandidates(userDataPath);
@@ -22,12 +34,12 @@ export async function resolveDictionaryPath(userDataPath: string | null): Promis
 
 export function resolveUserDataPath(): string | null {
 	try {
-		const electron = require("electron") as unknown as Record<string, any>;
-		if (electron?.app?.getPath) {
-			return electron.app.getPath("userData");
+		const electronCompat = electron as ElectronCompat;
+		if (electronCompat.app?.getPath) {
+			return electronCompat.app.getPath("userData");
 		}
-		if (electron?.remote?.app?.getPath) {
-			return electron.remote.app.getPath("userData");
+		if (electronCompat.remote?.app?.getPath) {
+			return electronCompat.remote.app.getPath("userData");
 		}
 	} catch {
 		// Ignore Electron lookup failures.
