@@ -298,8 +298,9 @@ export default class DictionarySyncPlugin extends Plugin {
 		const sourceWords = extractLineWordsFromNote(content);
 		const session = this.getSpellCheckerSession();
 		const listFunction = session?.listWordsInSpellCheckerDictionary ?? session?.listWordsFromSpellCheckerDictionary;
+		const addFunction = session?.addWordToSpellCheckerDictionary;
 		const removeFunction = session?.removeWordFromSpellCheckerDictionary;
-		if (!session || typeof listFunction !== "function") {
+		if (!session || typeof listFunction !== "function" || typeof addFunction !== "function") {
 			throw new Error("Spellchecker API is unavailable in this Obsidian environment.");
 		}
 
@@ -344,7 +345,7 @@ export default class DictionarySyncPlugin extends Plugin {
 		let addedCount = 0;
 		for (const word of wordsToAdd) {
 			try {
-				const added = session.addWordToSpellCheckerDictionary(word);
+				const added = addFunction.call(session, word);
 				if (added) {
 					addedCount += 1;
 				}
